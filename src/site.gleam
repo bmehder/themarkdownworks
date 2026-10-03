@@ -1,4 +1,6 @@
+import gleam/option.{Some}
 import gleam/string
+import gleam/uri.{type Uri, Uri}
 
 pub const base_url = "https://themarkdownworks.vercel.app"
 
@@ -8,16 +10,18 @@ pub type Metadata {
     description: String,
     path: String,
     image: String,
+    page_type: String,
     indexable: Bool,
   )
 }
 
 pub fn page(metadata: Metadata, content: String) -> String {
-  let Metadata(title:, description:, path:, image:, indexable:) = metadata
+  let Metadata(title:, description:, path:, image:, page_type:, indexable:) =
+    metadata
   let title = escape_html(title)
   let description = escape_html(description)
-  let canonical_url = escape_html(base_url <> path)
-  let image_url = escape_html(base_url <> image)
+  let canonical_url = escape_html(absolute_url(path))
+  let image_url = escape_html(absolute_url(image))
   let robots = case indexable {
     True -> ""
     False -> "\n    <meta name='robots' content='noindex'>"
@@ -35,14 +39,16 @@ pub fn page(metadata: Metadata, content: String) -> String {
     <link rel='canonical' href='" <> canonical_url <> "'>" <> robots <> "
     <meta property='og:title' content='" <> title <> "'>
     <meta property='og:description' content='" <> description <> "'>
-    <meta property='og:type' content='website'>
+    <meta property='og:type' content='" <> page_type <> "'>
     <meta property='og:url' content='" <> canonical_url <> "'>
     <meta property='og:image' content='" <> image_url <> "'>
     <meta name='twitter:card' content='summary_large_image'>
     <meta name='twitter:title' content='" <> title <> "'>
     <meta name='twitter:description' content='" <> description <> "'>
     <meta name='twitter:image' content='" <> image_url <> "'>
-    <link rel='icon' href='/assets/favicon.svg' type='image/svg+xml'>
+    <link rel='icon' href='/favicon.svg' type='image/svg+xml'>
+    <link rel='icon' href='/favicon-32.png' type='image/png' sizes='32x32'>
+    <link rel='apple-touch-icon' href='/apple-touch-icon.png' sizes='180x180'>
     <link rel='stylesheet' href='/assets/site.css'>
     <script src='/assets/site.js' defer></script>
   </head>
@@ -53,6 +59,35 @@ pub fn page(metadata: Metadata, content: String) -> String {
   </body>
 </html>
 "
+}
+
+pub fn absolute_url(reference: String) -> String {
+  let assert Ok(reference_uri) = uri.parse(reference)
+
+  case reference_uri {
+    Uri(scheme: Some(_), ..) -> uri.to_string(reference_uri)
+    Uri(..) -> {
+      let assert Ok(base_uri) = uri.parse(base_url)
+      let assert Ok(absolute_uri) = uri.merge(base_uri, reference_uri)
+
+      absolute_uri
+      |> preserve_trailing_slash(from: reference_uri)
+      |> uri.to_string
+    }
+  }
+}
+
+fn preserve_trailing_slash(absolute: Uri, from reference: Uri) -> Uri {
+  let Uri(path: reference_path, ..) = reference
+  let Uri(path: absolute_path, ..) = absolute
+
+  case
+    string.ends_with(reference_path, "/")
+    && !string.ends_with(absolute_path, "/")
+  {
+    True -> Uri(..absolute, path: absolute_path <> "/")
+    False -> absolute
+  }
 }
 
 pub fn escape_html(value: String) -> String {

@@ -10,6 +10,8 @@ The umbrella site for three independent open-source projects that use Markdown i
 
 The site introduces the projects, compares where each one fits, and gives each project a shared visual home without making them depend on one another. It is built with Docklands, dogfooding the same static-first approach it describes.
 
+This repository was initialized from [Docklands](https://github.com/bmehder/Docklands) at commit [`74bce36`](https://github.com/bmehder/Docklands/commit/74bce3619826eb2c05f92174094a17c18c227738), then customized with this site’s content, document shell, and visual identity.
+
 ## Website
 
 [themarkdownworks.vercel.app](https://themarkdownworks.vercel.app)
@@ -29,15 +31,16 @@ The site introduces the projects, compares where each one fits, and gives each p
 
 Requirements:
 
-- Gleam and Erlang/OTP
+- Gleam
 - Node.js
 - npm
 
-Install dependencies and start the local development server:
+Install dependencies, build the site, and start the local development server:
 
 ```sh
 npm install
-npm run dev
+npm run build
+npm run serve
 ```
 
 Create the production static build:
@@ -51,7 +54,7 @@ The generated site is written to `dist/`.
 ## How it is built
 
 - `content/routes/` contains the author-owned Markdown pages.
-- `src/` contains the small Gleam generator and shared document shell.
+- `src/` contains Docklands’ Gleam generator and this site’s shared document shell.
 - `assets/css/site.css` contains the visual system compiled by Tailwind CSS.
 - `assets/static/` contains files copied directly into the generated site.
 

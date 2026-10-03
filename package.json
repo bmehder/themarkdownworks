@@ -2,15 +2,17 @@
   "name": "themarkdownworks",
   "private": true,
   "scripts": {
-    "build": "gleam run && npm run build:css",
+    "build": "gleam run --target javascript && npm run build:images && npm run build:css",
     "build:css": "tailwindcss -i ./assets/css/site.css -o ./dist/assets/site.css --minify",
-    "build:vercel": "gleam run --target javascript && npm run build:css",
+    "build:images": "node scripts/optimize-images.mjs",
     "serve": "python3 -m http.server 8000 --directory dist",
-    "test": "gleam test",
-    "check": "gleam format --check src test && gleam test && npm run build"
+    "build:vercel": "gleam run --target javascript && npm run build:images && npm run build:css",
+    "test": "gleam test --target javascript",
+    "check": "gleam format --check src test && npm test && npm run build:vercel"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.0",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.3.0"
   },
   "type": "module"

@@ -1,4 +1,6 @@
+import collections.{FeaturedImage}
 import gleam/list
+import gleam/option.{None, Some}
 import gleam/string
 import mork
 
@@ -26,6 +28,17 @@ pub fn parse_document(source: String) -> Document {
   Document(title:, description:, indexable:, markdown:)
 }
 
+pub fn parse_featured_image(frontmatter: String) {
+  case frontmatter_value(frontmatter, "featured_image") {
+    Error(_) -> None
+    Ok(src) -> {
+      let assert Ok(alt) = frontmatter_value(frontmatter, "featured_alt")
+
+      Some(FeaturedImage(src:, alt:))
+    }
+  }
+}
+
 pub fn frontmatter_value(
   frontmatter: String,
   key: String,
@@ -42,6 +55,18 @@ pub fn frontmatter_value(
       _ -> Error(Nil)
     }
   })
+}
+
+pub fn frontmatter_list(frontmatter: String, key: String) -> List(String) {
+  case frontmatter_value(frontmatter, key) {
+    Error(_) -> []
+    Ok(value) ->
+      value
+      |> string.split(",")
+      |> list.map(string.trim)
+      |> list.filter(fn(item) { !string.is_empty(item) })
+      |> list.unique
+  }
 }
 
 fn frontmatter_flag(frontmatter: String, key: String) -> Bool {

@@ -1,18 +1,9 @@
-# Dependencies
-/node_modules/
-
-# Gleam and generated site output
 /build/
 /dist/
-erl_crash.dump
-
-# Local deployment metadata
+/node_modules/
 /.vercel/
-
-# Local environment
 .env*
 !.env.example
-
-# Logs and operating-system files
+erl_crash.dump
 npm-debug.log*
 .DS_Store
