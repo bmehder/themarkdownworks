@@ -47,9 +47,9 @@ pub fn page(metadata: Metadata, content: String) -> String {
     <script src='/assets/site.js' defer></script>
   </head>
   <body>
-    <main>
-      " <> header() <> content <> footer() <> "
-    </main>
+    " <> header() <> "
+    <main>" <> content <> "</main>
+    " <> footer() <> "
   </body>
 </html>
 "

@@ -24,7 +24,8 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--paper); }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif; }
-main { width: 100%; max-width: 1600px; margin-inline: auto; overflow: clip; }
+.site-header, body > main, .site-footer { width: 100%; max-width: 1600px; margin-inline: auto; }
+body > main { overflow: clip; }
 a { color: inherit; text-decoration: none; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 button { font: inherit; }
