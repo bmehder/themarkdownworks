@@ -2,6 +2,22 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
+const themeScript = `
+  try {
+    const saved = localStorage.getItem('tmw-theme');
+    const preference = ['system', 'dark', 'light'].includes(saved) ? saved : 'system';
+    const theme = preference === 'system'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : preference;
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch (_) {
+    const theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  }
+`;
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -13,14 +29,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://the-markdown-works.bmehder.chatgpt.site'),
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : 'http://localhost:3000',
+  ),
   title: 'The Markdown Works',
   description: 'Markdown works. We build around that. Home to Chippy, CheekyCMS, and Docklands.',
   openGraph: {
     title: 'The Markdown Works',
     description: 'Markdown works. We build around that. Home to Chippy, CheekyCMS, and Docklands.',
     type: 'website',
-    url: 'https://the-markdown-works.bmehder.chatgpt.site',
     images: [{ url: '/og.png', width: 1536, height: 1024, alt: 'The Markdown Works' }],
   },
   twitter: {
@@ -37,7 +56,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -1,3 +1,5 @@
+import { ThemeToggle } from './theme-toggle';
+
 const projects = [
   {
     number: '01', name: 'Chippy', accent: 'var(--chippy)', label: 'Dynamic website',
@@ -30,6 +32,7 @@ export default function Home() {
         <nav aria-label="Primary navigation">
           <a href="#projects">Projects</a><a href="#compare">Compare</a>
           <a href="https://github.com/bmehder" target="_blank" rel="noreferrer">GitHub <Arrow /></a>
+          <ThemeToggle />
         </nav>
       </header>
 
