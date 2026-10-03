@@ -8,7 +8,7 @@ The umbrella site for three independent open-source projects that use Markdown i
 - [CheekyCMS](https://cheekycms.fly.dev) — a read-only JSON content API for Markdown and repository-managed assets.
 - [Docklands](https://docklands-ssg.vercel.app) — a content-first static-site starter built with Gleam.
 
-The site introduces the projects, compares where each one fits, and gives each project a shared visual home without making them depend on one another.
+The site introduces the projects, compares where each one fits, and gives each project a shared visual home without making them depend on one another. It is built with Docklands, dogfooding the same static-first approach it describes.
 
 ## Website
 
@@ -18,6 +18,7 @@ The site introduces the projects, compares where each one fits, and gives each p
 
 - Responsive editorial layout with a restrained maximum width
 - Direct links to every project website and GitHub repository
+- Markdown routes generated into ordinary static HTML by Gleam
 - System-aware light and dark themes
 - Remembered theme preference with no incorrect-theme flash on page load
 - Keyboard-accessible desktop and mobile navigation
@@ -28,7 +29,8 @@ The site introduces the projects, compares where each one fits, and gives each p
 
 Requirements:
 
-- Node.js 22
+- Gleam and Erlang/OTP
+- Node.js
 - npm
 
 Install dependencies and start the local development server:
@@ -44,7 +46,16 @@ Create the production static build:
 npm run build
 ```
 
-The generated site is written to `dist/client`.
+The generated site is written to `dist/`.
+
+## How it is built
+
+- `content/routes/` contains the author-owned Markdown pages.
+- `src/` contains the small Gleam generator and shared document shell.
+- `assets/css/site.css` contains the visual system compiled by Tailwind CSS.
+- `assets/static/` contains files copied directly into the generated site.
+
+JavaScript is limited to `assets/static/site.js`: theme preference, closing the native mobile menu after navigation, and the back-to-top enhancement. The content, layout, navigation, comparison, and responsive design are static HTML and CSS.
 
 ## Deployment
 

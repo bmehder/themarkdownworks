@@ -8,14 +8,6 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/.vinext/
-/out/
-
 # misc
 .DS_Store
 *.pem
@@ -29,10 +21,7 @@ yarn-error.log*
 # local environment
 .env*
 
-# deployment and generated files
-.vercel
-next-env.d.ts
+# build and deployment files
+/build/
 /dist/
-/.wrangler/
-/outputs/
-/work/
+.vercel
