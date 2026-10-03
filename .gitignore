@@ -24,4 +24,8 @@ yarn-error.log*
 # build and deployment files
 /build/
 /dist/
+/.next/
+/.vinext/
+/.wrangler/
 .vercel
+next-env.d.ts
