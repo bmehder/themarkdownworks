@@ -1,4 +1,4 @@
-import { ThemeToggle } from './theme-toggle';
+import { BackToTop, MobileMenu, ThemeToggle } from './theme-toggle';
 
 const projects = [
   {
@@ -29,11 +29,12 @@ export default function Home() {
     <main>
       <header className="site-header page-shell">
         <a className="wordmark" href="#top" aria-label="The Markdown Works, home"><Mark /><span>The Markdown Works</span></a>
-        <nav aria-label="Primary navigation">
+        <nav className="desktop-nav" aria-label="Primary navigation">
           <a href="#projects">Projects</a><a href="#compare">Compare</a>
           <a href="https://github.com/bmehder" target="_blank" rel="noreferrer">GitHub <Arrow /></a>
           <ThemeToggle />
         </nav>
+        <MobileMenu />
       </header>
 
       <section className="hero page-shell" id="top">
@@ -93,7 +94,7 @@ export default function Home() {
 
       <footer className="site-footer page-shell">
         <div className="wordmark"><Mark /><span>The Markdown Works</span></div>
-        <p>Chippy, CheekyCMS, and Docklands are independent open-source projects.</p><a href="#top">Back to top ↑</a>
+        <p>Chippy, CheekyCMS, and Docklands are independent open-source projects.</p><BackToTop />
       </footer>
     </main>
   );

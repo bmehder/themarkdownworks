@@ -36,6 +36,7 @@ export const metadata: Metadata = {
   ),
   title: 'The Markdown Works',
   description: 'Markdown works. We build around that. Home to Chippy, CheekyCMS, and Docklands.',
+  icons: { icon: '/favicon.svg' },
   openGraph: {
     title: 'The Markdown Works',
     description: 'Markdown works. We build around that. Home to Chippy, CheekyCMS, and Docklands.',
