@@ -61,7 +61,7 @@ export function MobileMenu() {
     {open && <nav className="mobile-menu" id="mobile-navigation" aria-label="Mobile navigation">
       <a href="#projects" onClick={() => setOpen(false)}>Projects <span>↓</span></a>
       <a href="#compare" onClick={() => setOpen(false)}>Compare <span>↓</span></a>
-      <a href="https://github.com/bmehder" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
+      <a href="https://github.com/bmehder/themarkdownworks" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
       <div className="mobile-theme"><span>Colour theme</span><ThemeToggle compact /></div>
     </nav>}
   </div>;

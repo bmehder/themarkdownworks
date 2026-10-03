@@ -31,7 +31,7 @@ export default function Home() {
         <a className="wordmark" href="#top" aria-label="The Markdown Works, home"><Mark /><span>The Markdown Works</span></a>
         <nav className="desktop-nav" aria-label="Primary navigation">
           <a href="#projects">Projects</a><a href="#compare">Compare</a>
-          <a href="https://github.com/bmehder" target="_blank" rel="noreferrer">GitHub <Arrow /></a>
+          <a href="https://github.com/bmehder/themarkdownworks" target="_blank" rel="noreferrer">GitHub <Arrow /></a>
           <ThemeToggle />
         </nav>
         <MobileMenu />
