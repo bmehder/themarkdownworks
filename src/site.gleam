@@ -113,8 +113,9 @@ fn header() -> String {
   "<header class='site-header page-shell'>
     <a class='wordmark' href='/' aria-label='The Markdown Works, home'>" <> mark() <> "<span>The Markdown Works</span></a>
     <nav class='desktop-nav' aria-label='Primary navigation'>
-      <a href='#projects'>Projects</a>
-      <a href='#compare'>Compare</a>
+      <a href='/#projects'>Projects</a>
+      <a href='/#compare'>Compare</a>
+      <a href='/portability/'>Portability</a>
       <a href='https://github.com/bmehder/themarkdownworks' target='_blank' rel='noreferrer'>GitHub <span aria-hidden='true'>↗</span></a>
       " <> theme_button() <> "
     </nav>
@@ -123,8 +124,9 @@ fn header() -> String {
       <details class='mobile-menu'>
         <summary aria-label='Open navigation'><span></span><span></span></summary>
         <nav aria-label='Mobile navigation'>
-          <a href='#projects'>Projects <span>↓</span></a>
-          <a href='#compare'>Compare <span>↓</span></a>
+          <a href='/#projects'>Projects <span>↓</span></a>
+          <a href='/#compare'>Compare <span>↓</span></a>
+          <a href='/portability/'>Portability <span>→</span></a>
           <a href='https://github.com/bmehder/themarkdownworks' target='_blank' rel='noreferrer'>GitHub <span>↗</span></a>
         </nav>
       </details>
