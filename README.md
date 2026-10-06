@@ -12,6 +12,12 @@ The site introduces the projects, compares where each one fits, and gives each p
 
 This repository was initialized from [Docklands](https://github.com/bmehder/Docklands) at commit [`74bce36`](https://github.com/bmehder/Docklands/commit/74bce3619826eb2c05f92174094a17c18c227738), then customized with this site’s content, document shell, and visual identity.
 
+The content reader and generator now incorporate [Docklands v2.0.0](https://github.com/bmehder/Docklands/tree/v2.0.0), exact upstream commit `0ac71d3500c05b3876b0e7c8962a851a4fda139c`. The shared shell, styling, route content, and build entry point are customized for this site.
+
+This site supports [Markdown content contract 1.0.0](docs/markdown-contract.md). Every content route requires non-empty `title` and `description` strings and a `published` calendar date in `YYYY-MM-DD` form. Frontmatter is parsed as YAML; quoted strings and nested additional metadata are supported. Optional Docklands conventions remain documented upstream: comma-separated `tags`, `featured_image` with `featured_alt`, and `noindex`. This contract version is independent of the Docklands starter version.
+
+The [portable example](content/routes/portable/index.md) is copied unchanged from [the shared fixture](docs/examples/portable-page.md). Dates on existing routes come from their first appearance in Git history. See [the rollout record](docs/contract-rollout.md) for the other projects' verification status.
+
 ## Website
 
 [themarkdownworks.vercel.app](https://themarkdownworks.vercel.app)

@@ -1,6 +1,10 @@
 # Markdown contract rollout
 
-Status: contract 1.0.0 approved 2026-10-06. Audits complete; Docklands implementation is the first stage.
+Status: contract 1.0.0 approved 2026-10-06. Docklands complete; The Markdown Works local verification passed; production verification follows publication. Chippy is next.
+
+Docklands v1.0.0 records the baseline at `1882ef97dbc787efc26ea8c6616e8aa5552fc2a6`. Docklands v2.0.0 implements the contract at `0ac71d3500c05b3876b0e7c8962a851a4fda139c`; five tests and its full production check passed, and Vercel deployment `dpl_GPQCb1cDZnrLUPmyhxjJP8JxoAGj` was verified Ready. The Markdown Works adopts that release's content reader, generator, and locked dependencies while keeping its own shell and build configuration.
+
+The Markdown Works' four tests and production build pass. Its shared example is byte-for-byte identical to the canonical fixture and is exercised through the normal build. Existing homepage/404 publication dates are 2026-10-03; the portability article's date is 2026-10-05, based on Git history. Public messaging identifies completed support for Docklands and this site while leaving the other projects' support pending verification.
 
 Canonical specification: [markdown-contract.md](markdown-contract.md).
 

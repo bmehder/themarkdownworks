@@ -1,5 +1,6 @@
 ---
 title: The Markdown Works
+published: 2026-10-03
 description: Markdown works. We build around that. Home to Chippy, CheekyCMS, and Docklands.
 ---
 

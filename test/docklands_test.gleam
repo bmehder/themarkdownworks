@@ -1,3 +1,4 @@
+import content.{Document}
 import docklands
 import gleam/string
 import gleeunit
@@ -16,9 +17,23 @@ pub fn absolute_url_test() {
 }
 
 pub fn generated_site_test() {
+  let assert Ok(Document(title:, published:, ..)) =
+    content.parse_document(read_generated_file(
+      "content/routes/portable/index.md",
+    ))
+  assert title == "A portable page"
+  assert published == "2026-10-06"
+  assert read_generated_file("content/routes/portable/index.md")
+    == read_generated_file("docs/examples/portable-page.md")
   docklands.main()
 
   let home_page = read_generated_file("dist/index.html")
+  let portable_page = read_generated_file("dist/portable/index.html")
+  assert string.contains(portable_page, "<title>A portable page</title>")
+  assert !string.contains(
+    portable_page,
+    "This nested title is additional metadata",
+  )
   let not_found_page = read_generated_file("dist/404.html")
   let sitemap = read_generated_file("dist/sitemap.xml")
   let robots = read_generated_file("dist/robots.txt")
@@ -51,6 +66,10 @@ pub fn generated_site_test() {
     "<loc>https://themarkdownworks.vercel.app/</loc>",
   )
   assert !string.contains(sitemap, "/404.html")
+  assert string.contains(
+    sitemap,
+    "<loc>https://themarkdownworks.vercel.app/portable/</loc>\n    <lastmod>2026-10-06</lastmod>",
+  )
   assert string.contains(
     robots,
     "Sitemap: https://themarkdownworks.vercel.app/sitemap.xml",

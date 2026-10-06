@@ -1,5 +1,6 @@
 ---
 title: Portable by default — The Markdown Works
+published: 2026-10-05
 description: What moves cleanly between Markdown systems, what needs adaptation, and when to keep content and presentation together.
 ---
 
@@ -17,6 +18,18 @@ Your content is ordinary Markdown. Moving it elsewhere may require adapting meta
 That distinction matters. Portability does not mean every project has identical folders or that a complete site can always be moved unchanged. It means the writing remains plain text, assets remain files, and metadata remains visible rather than trapped behind an export process.
 
 ## What usually moves well
+
+We have agreed a [Markdown content contract](https://github.com/bmehder/themarkdownworks/blob/main/docs/markdown-contract.md) for documents with a title, description, and publication date. Docklands and this site now implement version 1.0.0. Chippy and CheekyCMS are being brought into alignment; shared support across all three is still being verified.
+
+```yaml
+---
+title: A portable page
+description: A short summary of the page.
+published: 2026-10-06
+---
+```
+
+Extra metadata is allowed. Routes, templates, optional field behaviour, and asset locations belong to the destination project. You can see the [shared example](/portable/) rendered by this site.
 
 - Markdown prose and headings
 - Images and downloadable files
