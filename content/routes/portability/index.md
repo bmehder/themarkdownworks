@@ -19,7 +19,7 @@ That distinction matters. Portability does not mean every project has identical 
 
 ## What usually moves well
 
-We have agreed a [Markdown content contract](https://github.com/bmehder/themarkdownworks/blob/main/docs/markdown-contract.md) for documents with a title, description, and publication date. Docklands and this site now implement version 1.0.0. Chippy and CheekyCMS are being brought into alignment; shared support across all three is still being verified.
+We have agreed a [Markdown content contract](https://github.com/bmehder/themarkdownworks/blob/main/docs/markdown-contract.md) for documents with a title, description, and publication date. Docklands, Chippy, and this site now implement version 1.0.0. CheekyCMS's content updates have passed local verification and await publication; the full rollout is tracked in [the project record](https://github.com/bmehder/themarkdownworks/blob/main/docs/contract-rollout.md).
 
 ```yaml
 ---
