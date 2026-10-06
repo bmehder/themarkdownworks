@@ -19,7 +19,7 @@ That distinction matters. Portability does not mean every project has identical 
 
 ## What usually moves well
 
-We have agreed a [Markdown content contract](https://github.com/bmehder/themarkdownworks/blob/main/docs/markdown-contract.md) for documents with a title, description, and publication date. Docklands, Chippy, and this site now implement version 1.0.0. CheekyCMS's content updates have passed local verification and await publication; the full rollout is tracked in [the project record](https://github.com/bmehder/themarkdownworks/blob/main/docs/contract-rollout.md).
+Docklands, Chippy, CheekyCMS, and this site support version 1.0.0 of our [Markdown content contract](https://github.com/bmehder/themarkdownworks/blob/main/docs/markdown-contract.md). A conforming document carries a title, description, and publication date. The same file can supply content to each project; its route and presentation belong to the destination.
 
 ```yaml
 ---

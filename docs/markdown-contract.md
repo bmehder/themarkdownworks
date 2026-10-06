@@ -1,6 +1,6 @@
 # Markdown content contract
 
-Status: approved 2026-10-06. Version: 1.0.0. Implementation rollout is in progress.
+Status: approved 2026-10-06. Version: 1.0.0.
 
 ## Promise
 
