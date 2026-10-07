@@ -38,5 +38,13 @@ pub fn tag_slug(tag: String) -> String {
 }
 
 pub fn all() -> List(Collection) {
-  []
+  [
+    Collection(
+      source_directory: "content/collections/guides",
+      route: "guides",
+      shortcode: "{{ guides }}",
+      item_label: "guide",
+      indexable: True,
+    ),
+  ]
 }

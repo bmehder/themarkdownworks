@@ -5,6 +5,8 @@ import gleam/io
 import gleam/list
 import simplifile
 
+/// Recreate `dist`, generate routes and discovery files, then copy static assets.
+/// Add build-time outputs here after preparation so they are not cleared away.
 pub fn main() -> Nil {
   prepare_output()
 
@@ -16,6 +18,8 @@ pub fn main() -> Nil {
   let route_sources = generator.load_routes()
 
   generator.build_routes(route_sources, shortcodes, loaded_collections)
+  generator.build_collections(loaded_collections, shortcodes)
+  generator.build_tags(loaded_collections)
   generator.write_discovery_files(route_sources, loaded_collections)
 
   copy_static_assets()

@@ -38,6 +38,7 @@ pub fn tag_count(loaded_collections: List(LoadedCollection)) -> Int {
 
 // Routes
 
+/// Discover and sort Markdown files beneath `content/routes`.
 pub fn load_routes() -> List(String) {
   let assert Ok(files) = simplifile.get_files(in: routes_directory)
 
@@ -46,6 +47,8 @@ pub fn load_routes() -> List(String) {
   |> list.sort(string.compare)
 }
 
+/// Parse route documents, expand registered shortcodes, render Markdown, apply
+/// the site shell, and write the corresponding HTML files under `dist`.
 pub fn build_routes(
   route_sources: List(String),
   shortcodes: List(Shortcode),

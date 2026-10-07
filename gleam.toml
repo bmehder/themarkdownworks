@@ -1,6 +1,8 @@
 name = "docklands"
 version = "2.0.0"
 target = "erlang"
+repository = { type = "custom", url = "https://github.com/bmehder/themarkdownworks" }
+links = [{ title = "User guides", href = "https://themarkdownworks.vercel.app/docs/" }]
 
 [dependencies]
 gleam_stdlib = ">= 0.44.0 and < 2.0.0"

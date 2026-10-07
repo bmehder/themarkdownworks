@@ -14,9 +14,9 @@ This repository was initialized from [Docklands](https://github.com/bmehder/Dock
 
 The content reader and generator now incorporate [Docklands v2.0.0](https://github.com/bmehder/Docklands/tree/v2.0.0), exact upstream commit `0ac71d3500c05b3876b0e7c8962a851a4fda139c`. The shared shell, styling, route content, and build entry point are customized for this site.
 
-This site supports [Markdown content contract 1.0.0](docs/markdown-contract.md). Every content route requires non-empty `title` and `description` strings and a `published` calendar date in `YYYY-MM-DD` form. Frontmatter is parsed as YAML; quoted strings and nested additional metadata are supported. Optional Docklands conventions remain documented upstream: comma-separated `tags`, `featured_image` with `featured_alt`, and `noindex`. This contract version is independent of the Docklands starter version.
+This site supports [Markdown content contract 1.0.0](https://github.com/bmehder/themarkdownworks/blob/main/docs/markdown-contract.md). Every content route requires non-empty `title` and `description` strings and a `published` calendar date in `YYYY-MM-DD` form. Frontmatter is parsed as YAML; quoted strings and nested additional metadata are supported. Optional Docklands conventions remain documented upstream: comma-separated `tags`, `featured_image` with `featured_alt`, and `noindex`. This contract version is independent of the Docklands starter version.
 
-The [portable example](content/routes/portable/index.md) is copied unchanged from [the shared fixture](docs/examples/portable-page.md). Dates on existing routes come from their first appearance in Git history. See [the rollout record](docs/contract-rollout.md) for the other projects' verification status.
+The [portable example](https://github.com/bmehder/themarkdownworks/blob/main/content/routes/portable/index.md) is copied unchanged from [the shared fixture](https://github.com/bmehder/themarkdownworks/blob/main/docs/examples/portable-page.md). Dates on existing routes come from their first appearance in Git history. See [the rollout record](https://github.com/bmehder/themarkdownworks/blob/main/docs/contract-rollout.md) for the other projects' verification status.
 
 ## Website
 
@@ -32,6 +32,14 @@ The [portable example](content/routes/portable/index.md) is copied unchanged fro
 - Keyboard-accessible desktop and mobile navigation
 - Static output suitable for deployment to any CDN
 - Open Graph artwork and a custom favicon
+- Practical [user guides](https://themarkdownworks.vercel.app/docs/) and a generated Gleam code reference
+- Build-time syntax highlighting with light/dark code themes, and styled inline code
+
+## Documentation
+
+The user guides live in `content/routes/docs/`. They cover installation, customization, implementation, extending the Gleam code, optional islands, and deployment costs across the three projects.
+
+Both build commands generate Gleam's public module reference and copy it to `dist/reference/`, served at `/reference/`. Add `///` comments above public definitions to explain implementation entry points. To generate just the reference locally, run `gleam docs build --target javascript --open`. There is no need to publish a Hex package.
 
 ## Development
 

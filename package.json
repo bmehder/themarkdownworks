@@ -2,17 +2,20 @@
   "name": "themarkdownworks",
   "private": true,
   "scripts": {
-    "build": "gleam run --target javascript && npm run build:images && npm run build:css",
+    "build": "gleam run --target javascript && npm run build:highlight && npm run build:images && npm run build:css && npm run build:reference",
+    "build:highlight": "node scripts/highlight-code.mjs",
+    "build:reference": "gleam docs build --target javascript && mkdir -p dist/reference && cp -R build/dev/docs/docklands/. dist/reference/ && cp assets/reference/docs_config.js dist/reference/docs_config.js",
     "build:css": "tailwindcss -i ./assets/css/site.css -o ./dist/assets/site.css --minify",
     "build:images": "node scripts/optimize-images.mjs",
     "serve": "python3 -m http.server 8000 --directory dist",
-    "build:vercel": "gleam run --target javascript && npm run build:images && npm run build:css",
+    "build:vercel": "gleam run --target javascript && npm run build:highlight && npm run build:images && npm run build:css && npm run build:reference",
     "test": "gleam test --target javascript",
-    "check": "gleam format --check src test && npm test && npm run build:vercel"
+    "check": "gleam format --check src test && npm test && npm run build:vercel && node scripts/check-code-highlighting.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.0",
     "sharp": "^0.34.4",
+    "shiki": "^4.5.0",
     "tailwindcss": "^4.3.0"
   },
   "type": "module"

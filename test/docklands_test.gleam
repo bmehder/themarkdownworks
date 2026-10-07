@@ -38,6 +38,26 @@ pub fn generated_site_test() {
   let sitemap = read_generated_file("dist/sitemap.xml")
   let robots = read_generated_file("dist/robots.txt")
   let site_script = read_generated_file("dist/assets/site.js")
+  let guides_index = read_generated_file("dist/guides/index.html")
+  let content_guide =
+    read_generated_file("dist/guides/start-with-the-content/index.html")
+  assert string.contains(guides_index, "href='/guides/start-with-the-content/'")
+  assert string.contains(content_guide, "<h1>Start with the content.</h1>")
+  assert string.contains(
+    content_guide,
+    "src='/assets/images/start-with-the-content.webp'",
+  )
+  assert !string.contains(content_guide, "{{ featured-image }}")
+  assert string.contains(
+    content_guide,
+    "href=\"/assets/templates/page-template.md\"",
+  )
+  assert read_generated_file("assets/static/templates/page-template.md")
+    == read_generated_file("dist/assets/templates/page-template.md")
+  assert string.contains(
+    read_generated_file("dist/tags/content/index.html"),
+    "Start with the content",
+  )
 
   assert string.contains(
     home_page,

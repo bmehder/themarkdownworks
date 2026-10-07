@@ -4,6 +4,7 @@ import gleam/uri.{type Uri, Uri}
 
 pub const base_url = "https://themarkdownworks.vercel.app"
 
+/// Metadata for the HTML document, canonical URL, and social previews.
 pub type Metadata {
   Metadata(
     title: String,
@@ -15,9 +16,25 @@ pub type Metadata {
   )
 }
 
+/// Wrap rendered HTML in this site's document shell. Documentation routes also
+/// receive the shared guide navigation. Content is trusted, already-rendered HTML.
 pub fn page(metadata: Metadata, content: String) -> String {
   let Metadata(title:, description:, path:, image:, page_type:, indexable:) =
     metadata
+  let content = case string.starts_with(path, "/docs/") {
+    True -> documentation(path, content)
+    False ->
+      case
+        string.starts_with(path, "/guides/")
+        || string.starts_with(path, "/tags/")
+      {
+        True ->
+          "<div class='guide-page docs-content page-shell'>"
+          <> content
+          <> "</div>"
+        False -> content
+      }
+  }
   let title = escape_html(title)
   let description = escape_html(description)
   let canonical_url = escape_html(absolute_url(path))
@@ -61,6 +78,7 @@ pub fn page(metadata: Metadata, content: String) -> String {
 "
 }
 
+/// Resolve a reference against the production URL, retaining trailing slashes.
 pub fn absolute_url(reference: String) -> String {
   let assert Ok(reference_uri) = uri.parse(reference)
 
@@ -90,6 +108,7 @@ fn preserve_trailing_slash(absolute: Uri, from reference: Uri) -> Uri {
   }
 }
 
+/// Escape text before inserting it into HTML text or quoted attribute values.
 pub fn escape_html(value: String) -> String {
   value
   |> string.replace("&", "&amp;")
@@ -101,6 +120,29 @@ pub fn escape_html(value: String) -> String {
 
 fn mark() -> String {
   "<span class='mark' aria-hidden='true'><i></i><i></i></span>"
+}
+
+fn documentation(path: String, content: String) -> String {
+  "<section class='docs-layout page-shell'><aside class='docs-sidebar'><p class='eyebrow'>Documentation</p><nav aria-label='Documentation'>"
+  <> doc_link(path, "/docs/", "Overview")
+  <> doc_link(path, "/docs/getting-started/", "Getting started")
+  <> doc_link(path, "/docs/customization/", "Customization")
+  <> doc_link(path, "/docs/how-it-works/", "How it works")
+  <> doc_link(path, "/docs/extending/", "Extending with Gleam")
+  <> doc_link(path, "/docs/deployment/", "Deployment & costs")
+  <> doc_link(path, "/docs/islands/", "JavaScript islands")
+  <> doc_link(path, "/docs/reference/", "Content & code reference")
+  <> "</nav></aside><article class='docs-content'>"
+  <> content
+  <> "</article></section>"
+}
+
+fn doc_link(current: String, href: String, label: String) -> String {
+  let active = case current == href {
+    True -> " aria-current='page'"
+    False -> ""
+  }
+  "<a href='" <> href <> "'" <> active <> ">" <> label <> "</a>"
 }
 
 fn theme_button() -> String {
@@ -116,6 +158,8 @@ fn header() -> String {
       <a href='/#projects'>Projects</a>
       <a href='/#compare'>Compare</a>
       <a href='/portability/'>Portability</a>
+      <a href='/docs/'>Docs</a>
+      <a href='/guides/'>Guides</a>
       <a href='https://github.com/bmehder/themarkdownworks' target='_blank' rel='noreferrer'>GitHub <span aria-hidden='true'>↗</span></a>
       " <> theme_button() <> "
     </nav>
@@ -127,6 +171,8 @@ fn header() -> String {
           <a href='/#projects'>Projects <span>↓</span></a>
           <a href='/#compare'>Compare <span>↓</span></a>
           <a href='/portability/'>Portability <span>→</span></a>
+          <a href='/docs/'>Docs <span>→</span></a>
+          <a href='/guides/'>Guides <span>→</span></a>
           <a href='https://github.com/bmehder/themarkdownworks' target='_blank' rel='noreferrer'>GitHub <span>↗</span></a>
         </nav>
       </details>

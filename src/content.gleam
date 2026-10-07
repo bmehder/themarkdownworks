@@ -13,6 +13,7 @@ pub type Metadata {
   Metadata(values: Dict(String, YamlNode))
 }
 
+/// Validated core metadata, the unrendered Markdown body, and retained YAML fields.
 pub type Document {
   Document(
     title: String,
@@ -37,6 +38,8 @@ pub type Shortcode {
   Shortcode(marker: String, html: String)
 }
 
+/// Parse YAML frontmatter and validate Markdown content contract 1.0.0.
+/// Unknown fields remain available through `Document.metadata`.
 pub fn parse_document(source: String) -> Result(Document, ParseError) {
   let #(frontmatter, markdown) = mork.split_frontmatter_from_input(source)
 
@@ -95,6 +98,7 @@ pub fn parse_featured_image(metadata: Metadata) {
   }
 }
 
+/// Read an optional text field. Missing or non-string values return `Error(Nil)`.
 pub fn metadata_string(metadata: Metadata, key: String) -> Result(String, Nil) {
   let Metadata(values:) = metadata
 
@@ -162,6 +166,7 @@ fn is_leap_year(year: Int) -> Bool {
   year % 4 == 0 && { year % 100 != 0 || year % 400 == 0 }
 }
 
+/// Replace registered whole-line markers outside fenced code blocks with HTML.
 pub fn expand_shortcodes(
   markdown: String,
   shortcodes: List(Shortcode),
