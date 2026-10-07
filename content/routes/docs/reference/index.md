@@ -24,6 +24,13 @@ Read the [canonical specification](https://github.com/bmehder/themarkdownworks/b
 
 Start with [content parsing](/reference/content.html), [generation](/reference/generator.html), and [the site shell](/reference/site.html). These explain implementation entry points rather than installing or editing a website.
 
+For the other projects, use their own implementation references:
+
+- [Chippy's Gleam code reference](https://chippy-gleam.fly.dev/reference/) — request handling, Markdown pages, templates, configuration, and forms.
+- [CheekyCMS's Gleam code reference](https://cheekycms.fly.dev/reference/) — content loading, catalogues, queries, API responses, and assets. This is separate from its content/API documentation.
+
+Each reference is generated from that project's source during its build. Read it alongside the practical guides and the version of the repository you are using.
+
 You can generate documentation locally in a Gleam repository:
 
 ```sh

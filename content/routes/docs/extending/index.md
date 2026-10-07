@@ -14,7 +14,7 @@ Consider the title of a page. `content.parse_document` reads the YAML into a dic
 
 This separation is intentional: parsing decides what data means, rendering decides how it looks, and generation decides where it goes. A function returning `String` here usually produces HTML; it is not a browser component with a lifecycle.
 
-Documentation itself is an example. The guides are ordinary files under `content/routes/docs/`. In `site.page`, a path beginning with `/docs/` selects a documentation wrapper. Private helpers build its navigation; CSS handles its layout. Adding another guide requires a Markdown route and a navigation entry, not a new routing framework. Gleam's module reference is generated separately by the build pipeline.
+Documentation itself is an example. The guides are ordinary files under `content/routes/docs/`. In `site.page`, a path beginning with `/docs/` selects `documentation.layout`. The `documentation` module owns the layout and ordered navigation; CSS handles its appearance. Adding another guide requires a Markdown route and an entry in `documentation.pages`, not a new routing framework. Gleam's module reference is generated separately by the build pipeline.
 
 ## Add an optional metadata feature
 
