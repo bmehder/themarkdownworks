@@ -1,3 +1,4 @@
+import documentation
 import gleam/option.{Some}
 import gleam/string
 import gleam/uri.{type Uri, Uri}
@@ -22,7 +23,7 @@ pub fn page(metadata: Metadata, content: String) -> String {
   let Metadata(title:, description:, path:, image:, page_type:, indexable:) =
     metadata
   let content = case string.starts_with(path, "/docs/") {
-    True -> documentation(path, content)
+    True -> documentation.layout(path, content)
     False ->
       case
         string.starts_with(path, "/guides/")
@@ -120,29 +121,6 @@ pub fn escape_html(value: String) -> String {
 
 fn mark() -> String {
   "<span class='mark' aria-hidden='true'><i></i><i></i></span>"
-}
-
-fn documentation(path: String, content: String) -> String {
-  "<section class='docs-layout page-shell'><aside class='docs-sidebar'><p class='eyebrow'>Documentation</p><nav aria-label='Documentation'>"
-  <> doc_link(path, "/docs/", "Overview")
-  <> doc_link(path, "/docs/getting-started/", "Getting started")
-  <> doc_link(path, "/docs/customization/", "Customization")
-  <> doc_link(path, "/docs/how-it-works/", "How it works")
-  <> doc_link(path, "/docs/extending/", "Extending with Gleam")
-  <> doc_link(path, "/docs/deployment/", "Deployment & costs")
-  <> doc_link(path, "/docs/islands/", "JavaScript islands")
-  <> doc_link(path, "/docs/reference/", "Content & code reference")
-  <> "</nav></aside><article class='docs-content'>"
-  <> content
-  <> "</article></section>"
-}
-
-fn doc_link(current: String, href: String, label: String) -> String {
-  let active = case current == href {
-    True -> " aria-current='page'"
-    False -> ""
-  }
-  "<a href='" <> href <> "'" <> active <> ">" <> label <> "</a>"
 }
 
 fn theme_button() -> String {
